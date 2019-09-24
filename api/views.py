@@ -19,10 +19,11 @@ class MetricFilter(django_filters.FilterSet):
 # Create your views here.
 class MetricViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows metrics to be viewed or edited.
+    API endpoint that allows metrics to be viewed.
     """
     queryset = Metric.objects.all()
     serializer_class = MetricSerializer
     filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter)
     filterset_class = MetricFilter
-    ordering_fields = ('channel', 'country', 'os', 'impressions', 'clicks', 'installs', 'spend', 'revenue', 'date')
+    ordering_fields = ('channel', 'country', 'os', 'impressions', 'clicks',
+                       'installs', 'spend', 'revenue', 'date', 'cpi')

@@ -4,6 +4,11 @@ from .models import Metric
 
 
 class MetricSerializer(serializers.HyperlinkedModelSerializer):
+    cpi = serializers.SerializerMethodField()
+
+    def get_cpi(self, obj):
+        return round(obj.spend / obj.installs, 2)
+
     class Meta:
         model = Metric
-        fields = ['url', 'channel', 'country', 'os', 'impressions', 'clicks', 'installs', 'spend', 'revenue', 'date']
+        fields = '__all__'
