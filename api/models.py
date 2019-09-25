@@ -4,12 +4,15 @@ from django.db.models.functions import Cast
 
 # Create your models here.
 class MetricManager(models.Manager):
-    """QuerySet manager for Metric class to add non-database fields."""
+    """
+    QuerySet manager for Metric class to add non-database fields.
+    """
     def get_queryset(self):
-        """Overrides the models.Manager method"""
-        qs = super(MetricManager, self).get_queryset()\
-            .annotate(cpi=Cast(models.F('spend') / models.F('installs'),
-                               output_field=models.DecimalField(max_digits=10, decimal_places=2)))
+        """
+        Overrides the models.Manager method.
+        """
+        qs = super(MetricManager, self).get_queryset().annotate(cpi=Cast(models.F('spend') / models.F('installs'),
+                                                                         output_field=models.DecimalField()))
         return qs
 
 
